@@ -29,6 +29,7 @@
     <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Controllers\" />
+    <Folder Include="TEST\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Employees\Create.cshtml" />
