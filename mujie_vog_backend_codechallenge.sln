@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VogCodeChallenge.API", "VogCodeChallenge.API\VogCodeChallenge.API.csproj", "{1DF5B2C4-3D08-4CE6-99A1-8BDB8E0CAF72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VogCodeChallenge.API.tests", "VogCodeChallenge.API.tests\VogCodeChallenge.API.tests.csproj", "{1355785A-6B46-4196-A0B5-BF7A3FF42320}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{1DF5B2C4-3D08-4CE6-99A1-8BDB8E0CAF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DF5B2C4-3D08-4CE6-99A1-8BDB8E0CAF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DF5B2C4-3D08-4CE6-99A1-8BDB8E0CAF72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1355785A-6B46-4196-A0B5-BF7A3FF42320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1355785A-6B46-4196-A0B5-BF7A3FF42320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1355785A-6B46-4196-A0B5-BF7A3FF42320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1355785A-6B46-4196-A0B5-BF7A3FF42320}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

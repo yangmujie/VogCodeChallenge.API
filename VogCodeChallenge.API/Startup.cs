@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using VogCodeChallenge.API.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace VogCodeChallenge.API
 {
@@ -26,10 +28,16 @@ namespace VogCodeChallenge.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSingleton<IEmployeeService, EmployeeService>();
+            services.AddSingleton<TestEmployee>();
+
+            services.AddDbContext<EmployeesDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("EmployeesDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,TestEmployee testEmployee)
         {
             if (env.IsDevelopment())
             {
@@ -43,6 +51,8 @@ namespace VogCodeChallenge.API
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            testEmployee.CreateTestEmployees();
         }
     }
 }
