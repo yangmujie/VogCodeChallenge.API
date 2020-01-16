@@ -30,23 +30,26 @@ namespace VogCodeChallenge.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            bool UseDataBase = bool.Parse(Configuration.GetValue(typeof(string), "DataBase").ToString());
 
-            //using Memory implementation,
-            services.AddSingleton<IEmployeeService, EmployeeService>();
-
-            //using Database
-            //services.AddScoped<IEmployeeService, DBEmployeeService>();
-
-
-            services.AddScoped<TestEmployee>();
-
-
-            services.AddDbContext<EmployeesDbContext>(options =>
-                    options.UseMySQL(Configuration.GetConnectionString("EmployeesDbContext")));
+            
+            if (UseDataBase)
+            {
+                services.AddScoped<IEmployeeService, DBEmployeeService>();
+                services.AddDbContext<EmployeesDbContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("EmployeesDbContext")));
+                services.AddScoped<TestEmployee>();
+            }
+            else
+            {
+                services.AddSingleton<IEmployeeService, EmployeeService>();
+                services.AddSingleton<TestEmployee>();
+            }
+  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TestEmployee testEmployee, EmployeesDbContext employeesDb)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TestEmployee testEmployee)
         {
             if (env.IsDevelopment())
             {
@@ -62,12 +65,33 @@ namespace VogCodeChallenge.API
             app.UseMvc();
 
 
-            //Create the database if it does not exist
-            employeesDb.Database.EnsureCreated();
+            bool UseDataBase = bool.Parse(Configuration.GetValue(typeof(string), "DataBase").ToString());
 
-           
-            testEmployee.CreateTestEmployees();
+
+            if (UseDataBase)
+            {
+                using (var serviceScope = app.ApplicationServices.CreateScope())
+                {
+                    EmployeesDbContext employeesDb = serviceScope.ServiceProvider.GetService<EmployeesDbContext>();
+
+                    employeesDb.Database.EnsureCreated();
+
+                    //Insert Test Data
+                    if (employeesDb.Employees.Count() == 0)
+                    {
+                        testEmployee.CreateTestEmployees();
+
+                    }
+                }
+                
+            }
+            else
+            {
+                testEmployee.CreateTestEmployees();
+            }
+
             
+
 
         }
     }

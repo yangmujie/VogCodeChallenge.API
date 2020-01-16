@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs
+/VogCodeChallenge.API/bin/Debug/netcoreapp2.2
+/VogCodeChallenge.API/obj
+/VogCodeChallenge.API.tests
+/VogCodeChallenge.Console

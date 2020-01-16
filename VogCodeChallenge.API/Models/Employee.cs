@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace VogCodeChallenge.API.Models
 {
     /// <summary>
@@ -10,27 +12,35 @@ namespace VogCodeChallenge.API.Models
         /// <summary>
         /// get or set EmployeeID
         /// </summary>
-        public Guid EmployeeID { get; set; }
+        public Guid EmployeeID { get; set; } = Guid.NewGuid();
 
         /// <summary>
         /// get or set Employee's FirstName
         /// </summary>
+        [StringLength(50)]
+        [Required]
         public string FirstName { get; set; }
 
 
         /// <summary>
         /// get or set Employee's LastName
         /// </summary>
+        [StringLength(50)]
+        [Required]
         public string LastName { get; set; }
 
         /// <summary>
         /// get or set Employee's JobTitle
         /// </summary>
+        [StringLength(50)]
+        [Required]
         public string JobTitle { get; set; }
 
         /// <summary>
         /// get or set Employee's Address
         /// </summary>
+        [StringLength(50)]
+        [Required]
         public string Address { get; set; }
 
 

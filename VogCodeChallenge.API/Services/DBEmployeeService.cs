@@ -14,6 +14,12 @@ namespace VogCodeChallenge.API.Services
         public DBEmployeeService(EmployeesDbContext employeesDb)
         {
             _employeesDb = employeesDb;
+
+            //Bind Department object to employee object
+            foreach (Employee employee in _employeesDb.Employees)
+            {
+                employee.Department = _employeesDb.Departments.Find(employee.DepartmentID);
+            }
         }
 
         public void Add(Employee employee)

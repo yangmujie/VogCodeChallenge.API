@@ -17,8 +17,7 @@ namespace VogCodeChallenge.API.Services
 
 
         public void Add(Employee employee)
-        {
-            employee.EmployeeID = Guid.NewGuid();
+        {            
             _employees[employee.EmployeeID] = employee;
         }
 

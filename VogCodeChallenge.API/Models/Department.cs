@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace VogCodeChallenge.API.Models
 {
@@ -11,17 +12,21 @@ namespace VogCodeChallenge.API.Models
         /// <summary>
         /// get or set DepartmentID
         /// </summary>
-        public Guid DepartmentID { get; set; }
+        public Guid DepartmentID { get; set; } = Guid.NewGuid();
 
 
         /// <summary>
         /// get or set Department's Name
         /// </summary>
+        [StringLength(50)]
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
         /// get or set Department's Address, and the Address must unique, Some judgment must be made when inserting
         /// </summary>
+        [StringLength(50)]
+        [Required]
         public string Address { get; set; }
 
 

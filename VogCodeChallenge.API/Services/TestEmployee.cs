@@ -18,14 +18,13 @@ namespace VogCodeChallenge.API.Services
             {
                 Name = "Human Resource",
                 Address = "Room 101",
-                DepartmentID = Guid.NewGuid()
+                
             };
 
             Department DevelopmentDepartment = new Department
             {
                 Name = "Development",
                 Address = "Room 102",
-                DepartmentID = Guid.NewGuid()
             };
 
 
@@ -35,7 +34,6 @@ namespace VogCodeChallenge.API.Services
                 Address = "123 Abc str",
                 Department = HRDepartment,
                 DepartmentID = HRDepartment.DepartmentID,
-                EmployeeID = Guid.NewGuid(),
                 FirstName = "Justin",
                 LastName = "Bieber",
                 JobTitle = "HR Manager"
@@ -46,7 +44,6 @@ namespace VogCodeChallenge.API.Services
                 Address = "555 Cba str",
                 Department = DevelopmentDepartment,
                 DepartmentID = DevelopmentDepartment.DepartmentID,
-                EmployeeID = Guid.NewGuid(),
                 FirstName = "Celine",
                 LastName = "Dion",
                 JobTitle = "Software Enginner"
@@ -57,7 +54,6 @@ namespace VogCodeChallenge.API.Services
                 Address = "999 Bcd str",
                 Department = DevelopmentDepartment,
                 DepartmentID = DevelopmentDepartment.DepartmentID,
-                EmployeeID = Guid.NewGuid(),
                 FirstName = "Avril",
                 LastName = "Lavigne",
                 JobTitle = "Senior Software Enginner"
