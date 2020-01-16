@@ -30,10 +30,9 @@ namespace VogCodeChallenge.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            bool UseDataBase = bool.Parse(Configuration.GetValue(typeof(string), "DataBase").ToString());
+            bool IsUseDataBase = Configuration.GetValue<bool>("DataBase");
 
-            
-            if (UseDataBase)
+            if (IsUseDataBase)
             {
                 services.AddScoped<IEmployeeService, DBEmployeeService>();
                 services.AddDbContext<EmployeesDbContext>(options =>
@@ -65,10 +64,10 @@ namespace VogCodeChallenge.API
             app.UseMvc();
 
 
-            bool UseDataBase = bool.Parse(Configuration.GetValue(typeof(string), "DataBase").ToString());
+            bool IsUseDataBase = Configuration.GetValue<bool>("DataBase");
 
 
-            if (UseDataBase)
+            if (IsUseDataBase)
             {
                 using (var serviceScope = app.ApplicationServices.CreateScope())
                 {
@@ -76,7 +75,7 @@ namespace VogCodeChallenge.API
 
                     employeesDb.Database.EnsureCreated();
 
-                    //Insert Test Data
+                    //Insert Test Data if Database is empty
                     if (employeesDb.Employees.Count() == 0)
                     {
                         testEmployee.CreateTestEmployees();
