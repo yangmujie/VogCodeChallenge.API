@@ -25,6 +25,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.19" />
   </ItemGroup>
 
   <ItemGroup>

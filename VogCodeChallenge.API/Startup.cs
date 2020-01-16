@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using VogCodeChallenge.API.Services;
 using Microsoft.EntityFrameworkCore;
+using VogCodeChallenge.API.Models;
 
 namespace VogCodeChallenge.API
 {
@@ -29,15 +30,23 @@ namespace VogCodeChallenge.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+
+            //using Memory implementation,
             services.AddSingleton<IEmployeeService, EmployeeService>();
-            services.AddSingleton<TestEmployee>();
+
+            //using Database
+            //services.AddScoped<IEmployeeService, DBEmployeeService>();
+
+
+            services.AddScoped<TestEmployee>();
+
 
             services.AddDbContext<EmployeesDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("EmployeesDbContext")));
+                    options.UseMySQL(Configuration.GetConnectionString("EmployeesDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env,TestEmployee testEmployee)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TestEmployee testEmployee, EmployeesDbContext employeesDb)
         {
             if (env.IsDevelopment())
             {
@@ -52,7 +61,14 @@ namespace VogCodeChallenge.API
             app.UseHttpsRedirection();
             app.UseMvc();
 
+
+            //Create the database if it does not exist
+            employeesDb.Database.EnsureCreated();
+
+           
             testEmployee.CreateTestEmployees();
+            
+
         }
     }
 }
