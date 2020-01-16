@@ -12,6 +12,7 @@ namespace VogCodeChallenge.API
         // 2.In some cases, only specific input get specific output, so this is no need
         //   to use local function.
 
+
         public static object Module(object testObject)
         {
             switch (testObject)
